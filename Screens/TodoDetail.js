@@ -8,11 +8,13 @@ const TodoDetail = () => {
   const todoDone = todo.todoList.filter((todo) => todo.done);
   return (
     <View style={{ marginLeft: 40, marginTop: 40 }}>
-      <Text style={styles.textStyle}>
+      <Text style={[styles.textStyle, { color: todo.color }]}>
         Length todos active: {todoDone.length}
       </Text>
       <View style={{ flexDirection: "row", marginTop: 10 }}>
-        <Text style={styles.textStyle}>Color active: </Text>
+        <Text style={[styles.textStyle, { color: todo.color }]}>
+          Color active:{" "}
+        </Text>
         <View
           style={{
             width: 40,
@@ -23,10 +25,12 @@ const TodoDetail = () => {
         />
       </View>
 
-      <Text style={styles.textStyle}>
+      <Text style={[styles.textStyle, { color: todo.color }]}>
         List Todos:{" "}
-        {todoDone.map((todo) => (
-          <Text style={styles.textStyle}>{todo.taskName}, </Text>
+        {todoDone.map((todoDone) => (
+          <Text style={[styles.textStyle, { color: todo.color }]}>
+            {todoDone.taskName},{" "}
+          </Text>
         ))}
       </Text>
     </View>
