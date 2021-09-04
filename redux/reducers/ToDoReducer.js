@@ -5,26 +5,20 @@ const initialState = {
     {
       id: "task-1",
       taskName: "TODO 1",
-      color: "",
       done: false,
-      focus: false,
     },
     {
       id: "task-2",
       taskName: "TODO 2",
-      color: "",
       done: false,
-      focus: false,
     },
     {
       id: "task-3",
       taskName: "TODO 3",
-      color: "",
       done: false,
-      focus: false,
     },
   ],
-  todoDone: [],
+  color: "",
 };
 
 export default (state = initialState, action) => {
@@ -58,27 +52,25 @@ export default (state = initialState, action) => {
       let taskListUpdate = [...state.todoList];
       let index = taskListUpdate.findIndex((task) => task.id === action.taskId);
       if (index !== -1) {
-        if (taskListUpdate[index].focus == false) {
-          taskListUpdate[index].focus = true;
+        if (taskListUpdate[index].done == false) {
+          taskListUpdate[index].done = true;
         } else {
-          taskListUpdate[index].focus = false;
+          taskListUpdate[index].done = false;
         }
       }
       return { ...state, todoList: taskListUpdate };
     }
     case submit_todo: {
-      let taskListUpdate = [...state.todoList];
-      taskListUpdate.map((todo) => {
-        if (todo.focus == true) {
-          todo.done = true;
-          todo.color = action.color;
-          state.todoDone.push(todo);
-        }
-      });
+      // let taskListUpdate = [...state.todoList];
+      // taskListUpdate.map((todo) => {
+      //   if (todo.focus == true) {
+      //     todo.done = true;
+      //     todo.color = action.color;
+      //     state.todoDone.push(todo);
+      //   }
+      // });
 
-      let newTodoList = taskListUpdate.filter((todo) => !todo.done);
-
-      return { ...state, todoList: newTodoList };
+      return { ...state, color: action.color };
     }
 
     default:

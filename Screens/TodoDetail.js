@@ -5,19 +5,30 @@ import { useSelector } from "react-redux";
 
 const TodoDetail = () => {
   const todo = useSelector((state) => state.todo);
-  const todoDone = todo.todoDone;
+  const todoDone = todo.todoList.filter((todo) => todo.done);
   return (
     <View style={{ marginLeft: 40, marginTop: 40 }}>
-      {todoDone.map((todo, index) => {
-        return (
-          <View style={{ flexDirection: "row", marginTop: 10 }} key={index}>
-            <View
-              style={{ width: 40, height: 40, backgroundColor: todo.color }}
-            />
-            <Text style={styles.textStyle}>{todo.taskName}</Text>
-          </View>
-        );
-      })}
+      <Text style={styles.textStyle}>
+        Length todos active: {todoDone.length}
+      </Text>
+      <View style={{ flexDirection: "row", marginTop: 10 }}>
+        <Text style={styles.textStyle}>Color active: </Text>
+        <View
+          style={{
+            width: 40,
+            height: 40,
+            backgroundColor: todo.color,
+            borderRadius: 10,
+          }}
+        />
+      </View>
+
+      <Text style={styles.textStyle}>
+        List Todos:{" "}
+        {todoDone.map((todo) => (
+          <Text style={styles.textStyle}>{todo.taskName}, </Text>
+        ))}
+      </Text>
     </View>
   );
 };

@@ -32,43 +32,41 @@ const Todo = ({ navigation }) => {
   const [todoColor, setTodoColor] = useState();
 
   const renderTodo = () => {
-    return todo.todoList
-      .filter((todo) => !todo.done)
-      .map((todo, index) => {
-        return (
-          <View
-            key={index}
-            style={{
-              flexDirection: "row",
-              marginTop: 20,
-              alignItems: "center",
+    return todo.todoList.map((todo, index) => {
+      return (
+        <View
+          key={index}
+          style={{
+            flexDirection: "row",
+            marginTop: 20,
+            alignItems: "center",
+          }}
+        >
+          <TouchableOpacity
+            style={styles.circle}
+            onPress={() => {
+              dispatch(changeFocus(todo.id));
             }}
           >
-            <TouchableOpacity
-              style={styles.circle}
-              onPress={() => {
-                dispatch(changeFocus(todo.id));
-              }}
-            >
-              {todo.focus == true ? (
-                <View
-                  style={{
-                    backgroundColor: "#007aff",
-                    width: 40,
-                    height: 40,
-                    borderRadius: 20,
-                    justifyContent: "center",
-                    alignItems: "center",
-                  }}
-                >
-                  <MaterialIcons name="done" color="white" size={30} />
-                </View>
-              ) : null}
-            </TouchableOpacity>
-            <Text style={styles.taskName}>{todo.taskName}</Text>
-          </View>
-        );
-      });
+            {todo.done == true ? (
+              <View
+                style={{
+                  backgroundColor: "#007aff",
+                  width: 40,
+                  height: 40,
+                  borderRadius: 20,
+                  justifyContent: "center",
+                  alignItems: "center",
+                }}
+              >
+                <MaterialIcons name="done" color="white" size={30} />
+              </View>
+            ) : null}
+          </TouchableOpacity>
+          <Text style={styles.taskName}>{todo.taskName}</Text>
+        </View>
+      );
+    });
   };
 
   return (
@@ -141,7 +139,6 @@ const Todo = ({ navigation }) => {
               id: Date.now(),
               taskName: taskName,
               done: false,
-              color: "",
             };
             dispatch(addTaskAction(newTask));
           }}
